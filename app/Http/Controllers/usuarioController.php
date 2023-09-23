@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\usuario;
 use Illuminate\Http\Request;
+use Termwind\Components\Li;
 
 class usuarioController extends Controller
 {
@@ -11,7 +13,7 @@ class usuarioController extends Controller
      */
     public function index()
     {
-        //
+        return usuario::all();
     }
 
     /**
@@ -19,7 +21,14 @@ class usuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(usuario::create($request ->all())){
+            return response()-> json([
+                'message'=> 'usuario cadastrada com sucesso'
+            ], 201);
+        }
+        return response()->json([
+            'message' => 'Erro ao cadastrar a usuario'
+        ], 404);
     }
 
     /**
