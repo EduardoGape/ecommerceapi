@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\transacao;
 use Illuminate\Http\Request;
+use Termwind\Components\Li;
 
 class transacaoController extends Controller
 {
@@ -11,7 +13,7 @@ class transacaoController extends Controller
      */
     public function index()
     {
-        //
+        return transacao::all();
     }
 
     /**
@@ -19,7 +21,14 @@ class transacaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(transacao::create($request ->all())){
+            return response()-> json([
+                'message'=> 'transacao cadastrada com sucesso'
+            ], 201);
+        }
+        return response()->json([
+            'message' => 'Erro ao cadastrar a transacao'
+        ], 404);
     }
 
     /**

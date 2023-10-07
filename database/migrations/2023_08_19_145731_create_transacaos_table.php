@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('transacaos', function (Blueprint $table) {
             $table->id();
+            $table->string("productId");
+            $table->string("userId");
+            $table->string("amount");
+            $table->string("dateTransaction");
             $table->timestamps();
         });
     }

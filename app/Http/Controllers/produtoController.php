@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\produto;
 use Illuminate\Http\Request;
+use Termwind\Components\Li;
 
 class produtoController extends Controller
 {
@@ -11,7 +13,7 @@ class produtoController extends Controller
      */
     public function index()
     {
-        //
+        return produto::all();
     }
 
     /**
@@ -19,7 +21,14 @@ class produtoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(produto::create($request ->all())){
+            return response()-> json([
+                'message'=> 'produto cadastrada com sucesso'
+            ], 201);
+        }
+        return response()->json([
+            'message' => 'Erro ao cadastrar a produto'
+        ], 404);
     }
 
     /**
